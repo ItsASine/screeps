@@ -61,7 +61,7 @@ var common = {
                 (builderCount < 2 ? 'builder' : null));
     newCreep = creepType ? params[creepType] : null;
 
-    if (newCreep && spawn.canCreateCreep(newCreep[0]) == OK) {
+    if (newCreep && spawn.canCreateCreep(newCreep[0]) === OK) {
       spawn.createCreep(newCreep[0], undefined, newCreep[1]);
     }
   },
@@ -69,7 +69,7 @@ var common = {
   harvestStuff: function(creep) {
     var sources = creep.room.find(FIND_SOURCES);
 
-    if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+    if (creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
       this.walk(creep, sources[0]);
     }
   }

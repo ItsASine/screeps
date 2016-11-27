@@ -13,7 +13,7 @@ var roleBuilder = {
   },
 
   buildingStatus: function(creep) {
-    if (creep.memory.building && creep.carry.energy == 0) {
+    if (creep.memory.building && creep.carry.energy === 0) {
       creep.memory.building = false;
       creep.say('Harvesting');
     }
@@ -27,7 +27,7 @@ var roleBuilder = {
     var sites = creep.room.find(FIND_CONSTRUCTION_SITES);
 
     if (sites.length) {
-      if (creep.build(sites[0]) == ERR_NOT_IN_RANGE) {
+      if (creep.build(sites[0]) === ERR_NOT_IN_RANGE) {
         helper.walk(creep, sites[0]);
       }
     } else {
@@ -43,7 +43,7 @@ var roleBuilder = {
     });
 
     if (targets.length) {
-      if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
+      if (creep.repair(targets[0]) === ERR_NOT_IN_RANGE) {
         helper.walk(creep, targets[0]);
       }
     }

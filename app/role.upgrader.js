@@ -13,7 +13,7 @@ var roleUpgrader = {
   },
 
   upgradingStatus: function(creep) {
-    if (creep.memory.upgrading && creep.carry.energy == 0) {
+    if (creep.memory.upgrading && creep.carry.energy === 0) {
       creep.memory.upgrading = false;
       creep.say('Harvesting');
     }
@@ -24,7 +24,7 @@ var roleUpgrader = {
   },
 
   upgradeController: function(creep) {
-    if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+    if (creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
       helper.walk(creep, creep.room.controller);
     }
   }

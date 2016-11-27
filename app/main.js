@@ -15,31 +15,33 @@ module.exports.loop = function() {
 
   Memory.tickCount = 0;
 
-  for (var name in Memory.creeps) {
-    if (!Game.creeps[name]) {
-      delete Memory.creeps[name];
-      console.log('Clearing non-existing creep memory:', name);
+  for (var memoryCreep in Memory.creeps) {
+    if (Memory.creeps.hasOwnProperty(memoryCreep) && !Game.creeps[memoryCreep]) {
+      delete Memory.creeps[memoryCreep];
+      console.log('Clearing non-existing creep memory:', memoryCreep);
     }
   }
 
   for (var name in Game.creeps) {
-    var creep = Game.creeps[name];
+    if(Game.creeps.hasOwnProperty(name)) {
+      var creep = Game.creeps[name];
 
-    switch (creep.memory.role) {
-      case 'harvester':
-        harvesters.push(creep);
-        roleHarvester.run(creep);
-        break;
-      case 'upgrader':
-        upgraders.push(creep);
-        roleUpgrader.run(creep);
-        break;
-      case 'builder':
-        builders.push(creep);
-        roleBuilder.run(creep);
-        break;
-      default:
-        console.log('Unknown role:', creep.memory.role);
+      switch (creep.memory.role) {
+        case 'harvester':
+          harvesters.push(creep);
+          roleHarvester.run(creep);
+          break;
+        case 'upgrader':
+          upgraders.push(creep);
+          roleUpgrader.run(creep);
+          break;
+        case 'builder':
+          builders.push(creep);
+          roleBuilder.run(creep);
+          break;
+        default:
+          console.log('Unknown role:', creep.memory.role);
+      }
     }
   }
 
