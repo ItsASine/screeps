@@ -19,6 +19,7 @@ var common = {
           console.log('Removing obstacle:', creep.name);
 
           creep.suicide();
+          Memory.suicides++; // log suicide count for my own knowledge
           Memory.stuckCount = 0;
         }
       }
@@ -36,34 +37,18 @@ var common = {
         creep.moveTo(target);
         break;
       case ERR_NO_PATH:
-        handleCreepClusters();
+        //handleCreepClusters();
         break;
       default:
         console.log('Path error:', move);
     }
   },
 
-  spawnStuff: function(harvesterCount, upgraderCount, builderCount) {
-    var creepType;
-    var newCreep;
-    var spawn = Game.spawns['Spawn1'];
+  spawnStuff: function() {
+    var spawner = require('spawner');
+    var spawn = Game.spawns['Spawn1']; // make this dynamic
 
-    var defaultParts = [WORK, CARRY, MOVE, MOVE];
-    var params = {
-      'harvester': [defaultParts, {role: 'harvester'}],
-      'upgrader': [defaultParts, {role: 'upgrader'}],
-      'builder': [defaultParts, {role: 'builder'}]
-    };
-
-    creepType =
-        harvesterCount < 2 ? 'harvester' :
-            (upgraderCount < 2 ? 'upgrader' :
-                (builderCount < 2 ? 'builder' : null));
-    newCreep = creepType ? params[creepType] : null;
-
-    if (newCreep && spawn.canCreateCreep(newCreep[0]) === OK) {
-      spawn.createCreep(newCreep[0], undefined, newCreep[1]);
-    }
+    spawner.spawnStuff(spawn);
   },
 
   harvestStuff: function(creep) {
@@ -71,6 +56,39 @@ var common = {
 
     if (creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
       this.walk(creep, sources[0]);
+    }
+  },
+
+  allCreeps: function() {
+    var harvesters = [];
+    var upgraders = [];
+    var builders = [];
+    var allCreeps = Game.creeps;
+
+    for (var name in allCreeps) {
+      if (allCreeps.hasOwnProperty(name)) {
+        var creep = allCreeps[name];
+
+        switch (creep.memory.role) {
+          case 'harvester':
+            harvesters.push(creep);
+            break;
+          case 'upgrader':
+            upgraders.push(creep);
+            break;
+          case 'builder':
+            builders.push(creep);
+            break;
+          default:
+            console.log('Unknown role:', creep.memory.role);
+        }
+      }
+    }
+
+    return {
+      'harvesters': harvesters,
+      'upgraders': upgraders,
+      'builders': builders
     }
   }
 };

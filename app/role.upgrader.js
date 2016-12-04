@@ -1,7 +1,7 @@
 'use strict';
 var helper = require('helper');
 
-var roleUpgrader = {
+var upgrader = {
   run: function(creep) {
     this.upgradingStatus(creep);
 
@@ -30,4 +30,4 @@ var roleUpgrader = {
   }
 };
 
-module.exports = roleUpgrader;
+module.exports = upgrader;

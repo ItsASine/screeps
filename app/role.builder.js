@@ -1,7 +1,7 @@
 'use strict';
 var helper = require('helper');
 
-var roleBuilder = {
+var builder = {
   run: function(creep) {
     this.buildingStatus(creep);
 
@@ -50,4 +50,4 @@ var roleBuilder = {
   }
 };
 
-module.exports = roleBuilder;
+module.exports = builder;

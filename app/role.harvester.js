@@ -1,7 +1,7 @@
 'use strict';
 var helper = require('helper');
 
-var roleHarvester = {
+var harvester = {
   run: function(creep) {
     if (this.needsEnergy(creep)) {
       this.pickupLitter(creep);
@@ -45,4 +45,4 @@ var roleHarvester = {
   }
 };
 
-module.exports = roleHarvester;
+module.exports = harvester;

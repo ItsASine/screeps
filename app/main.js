@@ -1,43 +1,34 @@
 'use strict';
-var roleHarvester = require('role.harvester');
-var roleUpgrader = require('role.upgrader');
-var roleBuilder = require('role.builder');
+var harvester = require('role.harvester');
+var upgrader = require('role.upgrader');
+var builder = require('role.builder');
+var tower = require('tower');
 var helper = require('helper');
+var memory = require('memory');
 
-if (!Memory.stuckCount) {
-  Memory.stuckCount = 0;
-}
+memory.init();
 
 module.exports.loop = function() {
-  var harvesters = [];
-  var upgraders = [];
-  var builders = [];
+  var allCreeps = Game.creeps;
+  var names = Object.keys(allCreeps);
 
   Memory.tickCount = 0;
 
-  for (var memoryCreep in Memory.creeps) {
-    if (Memory.creeps.hasOwnProperty(memoryCreep) && !Game.creeps[memoryCreep]) {
-      delete Memory.creeps[memoryCreep];
-      console.log('Clearing non-existing creep memory:', memoryCreep);
-    }
-  }
+  memory.clearDeadStuff(allCreeps);
 
-  for (var name in Game.creeps) {
-    if(Game.creeps.hasOwnProperty(name)) {
-      var creep = Game.creeps[name];
+  for (var name in allCreeps) {
+    if (allCreeps.hasOwnProperty(name)) {
+      var creep = allCreeps[name];
 
       switch (creep.memory.role) {
         case 'harvester':
-          harvesters.push(creep);
-          roleHarvester.run(creep);
+          harvester.run(creep);
           break;
         case 'upgrader':
-          upgraders.push(creep);
-          roleUpgrader.run(creep);
+          upgrader.run(creep);
           break;
         case 'builder':
-          builders.push(creep);
-          roleBuilder.run(creep);
+          builder.run(creep);
           break;
         default:
           console.log('Unknown role:', creep.memory.role);
@@ -45,23 +36,7 @@ module.exports.loop = function() {
     }
   }
 
-  helper.spawnStuff(harvesters.length, upgraders.length, builders.length);
+  tower.run(allCreeps[names[0]]);
 
-  /*var tower = Game.getObjectById('d6e1e71c84900a1a1596f2e8'); //read this in smartly
-   if (tower) {
-   var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-   filter: function(structure) {
-   return structure.hits < structure.hitsMax;
-   }
-   });
-   var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-
-   if (closestDamagedStructure) {
-   tower.repair(closestDamagedStructure);
-   }
-
-   if (closestHostile) {
-   tower.attack(closestHostile);
-   }
-   }*/
+  helper.spawnStuff();
 };
