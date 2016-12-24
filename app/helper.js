@@ -44,11 +44,20 @@ var common = {
     }
   },
 
+  chill: function(creep) {
+    var flag = Game.flags.get(0);
+
+    if (!creep.pos.inRangeTo(flag, 4)) {
+      creep.walk(flag);
+    }
+  },
+
   spawnStuff: function() {
     var spawner = require('spawner');
-    var spawn = Game.spawns['Spawn1']; // make this dynamic
 
-    spawner.spawnStuff(spawn);
+    Game.spawns.forEach(function(spawn) {
+      spawner.spawnStuff(spawn);
+    });
   },
 
   harvestStuff: function(creep) {
@@ -63,6 +72,7 @@ var common = {
     var harvesters = [];
     var upgraders = [];
     var builders = [];
+    var defenders = [];
     var allCreeps = Game.creeps;
 
     for (var name in allCreeps) {
@@ -79,8 +89,12 @@ var common = {
           case 'builder':
             builders.push(creep);
             break;
+          case 'defender':
+            defenders.push(creep);
+            break;
           default:
             console.log('Unknown role:', creep.memory.role);
+            creep.suicide();
         }
       }
     }
@@ -88,7 +102,8 @@ var common = {
     return {
       'harvesters': harvesters,
       'upgraders': upgraders,
-      'builders': builders
+      'builders': builders,
+      'defenders': defenders
     }
   }
 };

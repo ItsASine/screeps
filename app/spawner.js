@@ -1,5 +1,6 @@
 'use strict';
 var builder = require('role.builder');
+var defender = require('role.defender');
 var harvester = require('role.harvester');
 var upgrader = require('role.upgrader');
 var helper = require('helper');
@@ -19,33 +20,39 @@ var spawner = {
       },
       3: {
         'harvester': 1,
-        'upgrader': 2,
-        'builder': 2
+        'upgrader': 3,
+        'builder': 2,
+        'defender': 1
       },
       4: {
         'harvester': 1,
-        'upgrader': 2,
-        'builder': 2
+        'upgrader': 3,
+        'builder': 3,
+        'defender': 1
       },
       5: {
         'harvester': 1,
-        'upgrader': 2,
-        'builder': 2
+        'upgrader': 3,
+        'builder': 2,
+        'defender': 2
       },
       6: {
         'harvester': 1,
-        'upgrader': 2,
-        'builder': 2
+        'upgrader': 3,
+        'builder': 2,
+        'defender': 2
       },
       7: {
         'harvester': 1,
-        'upgrader': 2,
-        'builder': 2
+        'upgrader': 4,
+        'builder': 2,
+        'defender': 2
       },
       8: {
-        'harvester': 1,
-        'upgrader': 2,
-        'builder': 2
+        'harvester': 2,
+        'upgrader': 0,
+        'builder': 3,
+        'defender': 4
       }
     }
   },
@@ -63,34 +70,40 @@ var spawner = {
         'builder': [WORK, WORK, CARRY, MOVE]
       },
       3: {
-        'harvester': [MOVE, MOVE, WORK, CARRY, CARRY],
-        'upgrader': [MOVE, MOVE, WORK, WORK, CARRY],
-        'builder': [WORK, WORK, CARRY, CARRY, MOVE]
+        'harvester': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
+        'upgrader': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
+        'builder': [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE],
+        'defender': [TOUGH, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE]
       },
       4: {
-        'harvester': [MOVE, MOVE, WORK, CARRY, CARRY],
-        'upgrader': [MOVE, MOVE, WORK, WORK, CARRY],
-        'builder': [WORK, WORK, CARRY, CARRY, MOVE]
+        'harvester': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
+        'upgrader': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
+        'builder': [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE],
+        'defender': [TOUGH, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE]
       },
       5: {
         'harvester': [MOVE, MOVE, WORK, CARRY, CARRY],
         'upgrader': [MOVE, MOVE, WORK, WORK, CARRY],
-        'builder': [WORK, WORK, CARRY, CARRY, MOVE]
+        'builder': [WORK, WORK, CARRY, CARRY, MOVE],
+        'defender': [TOUGH, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE]
       },
       6: {
-        'harvester': [MOVE, MOVE, WORK, CARRY, CARRY],
-        'upgrader': [MOVE, MOVE, WORK, WORK, CARRY],
-        'builder': [WORK, WORK, CARRY, CARRY, MOVE]
+        'harvester': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
+        'upgrader': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
+        'builder': [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE],
+        'defender': [TOUGH, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE]
       },
       7: {
-        'harvester': [MOVE, MOVE, WORK, CARRY, CARRY],
-        'upgrader': [MOVE, MOVE, WORK, WORK, CARRY],
-        'builder': [WORK, WORK, CARRY, CARRY, MOVE]
+        'harvester': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
+        'upgrader': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
+        'builder': [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE],
+        'defender': [TOUGH, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE]
       },
       8: {
-        'harvester': [MOVE, MOVE, WORK, CARRY, CARRY],
-        'upgrader': [MOVE, MOVE, WORK, WORK, CARRY],
-        'builder': [WORK, WORK, CARRY, CARRY, MOVE]
+        'harvester': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
+        'upgrader': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
+        'builder': [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE],
+        'defender': [TOUGH, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE]
       }
     }
   },
@@ -125,6 +138,13 @@ var spawner = {
           parts: neededParts[level].builder,
           name: undefined,
           options: {role: 'builder'}
+        });
+      }
+      if (allCreeps.defenders.length < neededCreeps[level].defender) {
+        Memory.spawnQueue.push({
+          parts: neededParts[level].defender,
+          name: undefined,
+          options: {role: 'defender'}
         });
       }
     }
