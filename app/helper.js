@@ -54,10 +54,9 @@ var common = {
 
   spawnStuff: function() {
     var spawner = require('spawner');
+    var spawn = Game.spawns['Spawn1']; // make this dynamic
 
-    Game.spawns.forEach(function(spawn) {
-      spawner.spawnStuff(spawn);
-    });
+    spawner.spawnStuff(spawn);
   },
 
   harvestStuff: function(creep) {
