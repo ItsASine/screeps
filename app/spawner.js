@@ -70,37 +70,37 @@ var spawner = {
         'builder': [WORK, WORK, CARRY, MOVE]
       },
       3: {
-        'harvester': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
+        'harvester': [MOVE, MOVE, WORK, CARRY],
         'upgrader': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
         'builder': [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE],
         'defender': [TOUGH, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE]
       },
       4: {
-        'harvester': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
+        'harvester': [MOVE, MOVE, WORK, CARRY],
         'upgrader': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
         'builder': [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE],
         'defender': [TOUGH, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE]
       },
       5: {
-        'harvester': [MOVE, MOVE, WORK, CARRY, CARRY],
-        'upgrader': [MOVE, MOVE, WORK, WORK, CARRY],
-        'builder': [WORK, WORK, CARRY, CARRY, MOVE],
+        'harvester': [MOVE, MOVE, WORK, CARRY],
+        'upgrader': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
+        'builder': [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE],
         'defender': [TOUGH, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE]
       },
       6: {
-        'harvester': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
+        'harvester': [MOVE, MOVE, WORK, CARRY],
         'upgrader': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
         'builder': [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE],
         'defender': [TOUGH, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE]
       },
       7: {
-        'harvester': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
+        'harvester': [MOVE, MOVE, WORK, CARRY],
         'upgrader': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
         'builder': [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE],
         'defender': [TOUGH, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE]
       },
       8: {
-        'harvester': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
+        'harvester': [MOVE, MOVE, WORK, CARRY],
         'upgrader': [MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY],
         'builder': [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE],
         'defender': [TOUGH, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE]
