@@ -36,7 +36,9 @@ module.exports.loop = function() {
     }
   }
 
-  tower.run(allCreeps[names[0]]);
+  if(names.length > 0) {
+    tower.run(allCreeps[names[0]]);
+  }
 
   helper.spawnStuff();
 };
