@@ -179,6 +179,14 @@ var spawner = {
       if (spawner.canCreateCreep(firstCreep.parts) === OK) {
         spawner.createCreep(firstCreep.parts, firstCreep.name, firstCreep.options);
         Memory.spawnQueue.shift();
+      } else {
+        // if there are not enough resources for creating the creep, try to build the lower level version
+        var priorLevelParts = this.creepParts()[(level > 1 ? level - 1 : 1)][firstCreep.options.role];
+
+        if (spawner.canCreateCreep(priorLevelParts) === OK) {
+          spawner.createCreep(priorLevelParts, firstCreep.name, firstCreep.options);
+          Memory.spawnQueue.shift();
+        }
       }
     }
   }
