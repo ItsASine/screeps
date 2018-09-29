@@ -1,5 +1,0 @@
-{
-  "preset": "google",
-  "maxErrors": -1,
-  "excludeFiles": ["node_modules/**", "**/*!(js)"]
-}

@@ -1,6 +1,6 @@
 {
   "name": "screeps-itsasine",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Scripts for screeps",
   "repository": {
     "type": "git",
@@ -13,10 +13,13 @@
     "url": "https://github.com/ItsASine/screeps/issues"
   },
   "homepage": "screeps.com",
-  "dependencies": {
-    "jscs": "^3.0.7"
-  },
   "scripts": {
-    "style": "node node_modules/jscs/bin/jscs *"
+    "style": "node node_modules/eslint/bin/eslint app/",
+    "fix-style": "node node_modules/eslint/bin/eslint app/ --fix"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^5.6.1",
+    "eslint-config-google": "^0.10.0"
   }
 }
