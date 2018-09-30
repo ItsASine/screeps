@@ -3,25 +3,19 @@ var globals = require('globals');
 var roleUpgrader = {
   /** @param {Creep} creep **/
   run: function(creep) {
-    if (creep.memory.upgrading && creep.carry.energy === 0) {
-      creep.memory.upgrading = false;
-      creep.say('🔄 harvest');
-    }
-    if (!creep.memory.upgrading && creep.carry.energy === creep.carryCapacity) {
-      creep.memory.upgrading = true;
-      creep.say('⚡ upgrade');
-    }
+    globals.setWorkingStatus(creep);
 
-    if (creep.memory.upgrading) {
-      if (creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(creep.room.controller, globals.lines.white);
-      }
+    if (creep.memory.working) {
+      this.upgrade(creep);
     } else {
-      var sources = creep.room.find(FIND_SOURCES);
+      globals.harvest(creep);
+    }
+  },
 
-      if (creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(sources[0], globals.lines.yellow);
-      }
+  /** @param {Creep} creep **/
+  upgrade: function(creep) {
+    if (creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
+      creep.moveTo(creep.room.controller, globals.lines.white);
     }
   }
 };
